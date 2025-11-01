@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  api:
+    extra_hosts: 
+      - "host.docker.internal:host-gateway"
+    build: .
+    container_name: api-taskup
+    ports:
+      - "8007:4000"
+    env_file:
+      - ./src/.env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - taskup-network
+
+networks:
+  taskup-network:
+    driver: bridge
+
+
